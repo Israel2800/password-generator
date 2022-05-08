@@ -1,10 +1,10 @@
 // Variables
-var characterLength = 8;
-var choiceArray = [];
-var specialCharArr = ["!","@","#","$","%","&","*","+","-","<",">","¿","?","[","]","{","}","(",")","/","^","_",".",";","|"];
-var lowerCaseArr = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-var upperCaseArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var numberArr = ["0","1","2","3","4","5","6","7","8","9"];
+var charLength = 8;
+var choiceArr = [];
+var specialChar = ["!","@","#","$","%","&","*","+","-","<",">","¿","?","[","]","{","}","(",")","/","^","_",".",";","|"];
+var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var number = ["0","1","2","3","4","5","6","7","8","9"];
 
 // Assignment code here
 // link to characters: http://www.net-comber.com/charset.html
@@ -46,9 +46,9 @@ console.log(getRandomSymbol());
 // Function to generate a password
 function generatePassword() {
   var pass = "";
-  for(var i = 0; i < characterLength; i++){
-    var randomPass = Math.floor(Math.random() * choiceArray.length);
-    pass = pass + choiceArray[randomPass];
+  for(var i = 0; i < charLength; i++){
+    var randomPass = Math.floor(Math.random() * choiceArr.length);
+    pass = pass + choiceArr[randomPass];
   }  
   return pass;
 }
@@ -56,27 +56,27 @@ function generatePassword() {
 // function to get quantity of characters the user wants
 
 function getProm(){
-  choiceArray = [];
-  characterLength = parseInt(prompt("How many characters would you like your password to contain? (8 - 120 characters)"));
-  if (isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
+  choiceArr = [];
+  charLength = parseInt(prompt("How many characters would you like your password to contain? (8 - 120 characters)"));
+  if (isNaN(charLength) || charLength < 8 || charLength > 128) {
     alert("Incorrect length, please try again (8-128).");
     return false;
   }
   
   if (confirm("Click OK to confirm including special characters.")){
-    choiceArray = choiceArray.concat(specialCharArr);
+    choiceArr = choiceArr.concat(specialChar);
   }
 
   if (confirm("Click OK to confirm including numeric characters.")){
-    choiceArray = choiceArray.concat(numberArr);
+    choiceArr = choiceArr.concat(number);
   }
   
   if (confirm("Click OK to confirm including lowercase characters.")){
-    choiceArray = choiceArray.concat(lowerCaseArr);
+    choiceArr = choiceArr.concat(lowerCase);
   }
 
   if (confirm("Click OK to confirm including uppercase characters.")){
-    choiceArray = choiceArray.concat(upperCaseArr);
+    choiceArr = choiceArr.concat(upperCase);
   }
 
   return true;
