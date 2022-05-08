@@ -1,14 +1,14 @@
 // Variables
-
 var characterLength = 8;
 var choiceArray = [];
-var specialCharArr = [];
-var lowerCaseArr = [];
-var upperCaseArr = [];
+var specialCharArr = ["!","@","#","$","%","&","*","+","-","<",">","¿","?","[","]","{","}","(",")","/","^","_",".",";","|"];
+var lowerCaseArr = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var upperCaseArr = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+var numberArr = ["0","1","2","3","4","5","6","7","8","9"];
 
 // Assignment code here
-// link to letters: http://www.net-comber.com/charset.html
-
+// link to characters: http://www.net-comber.com/charset.html
+    
 const randomFunc = {
   lower: getRandomLower,
   upper: getRandomUpper,
@@ -37,67 +37,70 @@ function getRandomLower(){
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
 }
 
-// Represents letters of alphabet in CONSOLE
+// Represents random letters of alphabet in CONSOLE
 console.log(getRandomLower());
 console.log(getRandomUpper());
 console.log(getRandomNumber());
 console.log(getRandomSymbol());
 
-// function to get quantity of characters the user wants
-function generatePassword(lowe, upper, number, symbol, length) {
-  //1. Initialize pass var
-  //2. Filter out "OK"
-  //3. Loop over the length call generator funcion for each type
-  //4. Add final password to the password var and return
-
-  let generatedPassword = '';
-  
-  const typesCount = lower + upper + number + symbol;
-
-  const typesArr = [lower, upper, number, symbol];
-  console.log("Types Array: ", typesArr);
-
-}
-
+// Function to generate a password
 function generatePassword() {
-  var char = "";
-  while (char === "" || char === null) {
-    char = prompt("How many characters would you like your password to contain?");
-  }
-  // alert("You decided to have "+char+" characters");
-  // console.log("You decided to have "+char+"characters");
-  // return char;
-
- 
-
+  var pass = "";
+  for(var i = 0; i < characterLength; i++){
+    var randomPass = Math.floor(Math.random() * choiceArray.length);
+    pass = pass + choiceArray[randomPass];
+  }  
+  return pass;
 }
-/* OTHER WAY TO DO IT
 
-var getChar = function() {
-  var char = "";
-  while (char === "" || char === null) {
-    char = prompt("How many characters would you like your password to contain?");
+// function to get quantity of characters the user wants
+
+function getProm(){
+  choiceArray = [];
+  characterLength = parseInt(prompt("How many characters would you like your password to contain? (8 - 120 characters)"));
+  if (isNaN(characterLength) || characterLength < 8 || characterLength > 128) {
+    alert("Incorrect length, please try again (8-128).");
+    return false;
   }
-  console.log("You chose "+char);
-  return char;
-}; 
-*/
+  
+  if (confirm("Click OK to confirm including special characters.")){
+    choiceArray = choiceArray.concat(specialCharArr);
+  }
 
+  if (confirm("Click OK to confirm including numeric characters.")){
+    choiceArray = choiceArray.concat(numberArr);
+  }
+  
+  if (confirm("Click OK to confirm including lowercase characters.")){
+    choiceArray = choiceArray.concat(lowerCaseArr);
+  }
+
+  if (confirm("Click OK to confirm including uppercase characters.")){
+    choiceArray = choiceArray.concat(upperCaseArr);
+  }
+
+  return true;
+  
+}
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var correctProm = getProm();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
 
- 
+  if (correctProm) {
+    var password = generatePassword();
+    passwordText.value = password;  
+  } else {
+    passwordText.value = "";
+  } 
   
 }
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", generatePassword);
+generateBtn.addEventListener("click", writePassword);
