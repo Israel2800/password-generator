@@ -9,10 +9,10 @@ A password generator tool that provides a secure password to all the users; you 
 * JavaScript
 
 ## Website
-https://israel2800.github.io/password-generator-challenge/
+https://israel2800.github.io/password-generator/
 
 ## GitHub Repository
-https://github.com/Israel2800/password-generator-challenge
+https://github.com/Israel2800/password-generator
 
 ## Contribution
 Made with ❤️ by [Israel Aguilar]
